@@ -63,10 +63,15 @@
               "projects/proz-test-app/src/assets"
             ],
             "styles": [
+              "styles/tailwind.css",
               "projects/proz-test-app/src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {

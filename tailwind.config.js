@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ['./src/**/*.{js,jsx,ts,tsx}'],
+    purge: ['./projects/proz-test-app/src/**/*.{html,ts}'],
+    content: ['./projects/proz-test-app/src/**/*.{js,jsx,ts,tsx}'],
     darkMode: 'class',
     theme: {
         fontFamily: {
