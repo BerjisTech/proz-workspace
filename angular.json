@@ -3,5 +3,41 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "proz": {
+      "projectType": "library",
+      "root": "projects/proz",
+      "sourceRoot": "projects/proz/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/proz/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/proz/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/proz/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/proz/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "77a56956-ed88-4465-9b88-d711ad5679cd"
   }
 }
