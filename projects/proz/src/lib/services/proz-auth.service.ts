@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProzAuthService {
-  private apiUrl = 'https://proz.com/api/v1/authentication';
+  private apiUrl = 'https://api.proz.com/v2/';
 
   constructor(private http: HttpClient) { }
 

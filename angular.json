@@ -63,7 +63,9 @@
               "projects/proz-test-app/src/assets"
             ],
             "styles": [
-              "projects/proz-test-app/src/styles.scss"
+              "projects/proz-test-app/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -131,7 +133,7 @@
             "scripts": []
           }
         }
-      }
+      }      
     }
   },
   "cli": {
