@@ -1,13 +1,37 @@
 <div class="w-screen h-screen bg-slate-100 p-3">
     <span class="table fs-3">User Actions</span>
-    <span (click)="getActiveUser()" class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md" role="button">Get User</span>
-    <span (click)="getUsers()" class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md" role="button">Get Users</span>
-    <span (click)="getUser()" class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md" role="button">Get users/uuid</span>
+    <span (click)="getActiveUser()"
+        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+        role="button">Get User</span>
+    <span (click)="getUsers()"
+        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+        role="button">Get Users</span>
+    <span (click)="getUser()"
+        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+        role="button">Get users/uuid</span>
+    <hr />
+    <div *ngIf="userData">
+        <span>Get User Data Response</span>
+        <pre>{{ userData | json }}</pre>
+    </div>
     <hr />
     <span class="table fs-3">Availablity Actions</span>
-    <span (click)="getAvailability()" class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md" role="button">Get Availability</span>
-    <span (click)="getAvailabilityOnDate()" class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md" role="button">Get Availability on Date</span>
-    <span (click)="setAvailability()" class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md" role="button">Set Availability</span>
-    <span (click)="setAvailabilityOnDate()" class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md" role="button">Set Availability on Date</span>
-    <lib-user-availability-icon [user]="user"></lib-user-availability-icon>
+    <span (click)="getAvailability()"
+        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+        role="button">Get Availability</span>
+    <span (click)="getAvailabilityOnDate()"
+        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+        role="button">Get Availability on Date</span>
+    <span (click)="setAvailability()"
+        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+        role="button">Set Availability</span>
+    <span (click)="setAvailabilityOnDate()"
+        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+        role="button">Set Availability on Date</span>
+        <hr />
+        <div *ngIf="availabilityData">
+            <span>Get User Data Response</span>
+            <pre>{{ availabilityData | json }}</pre>
+        </div>
+        <hr />
 </div>

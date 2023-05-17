@@ -16,6 +16,8 @@ export class LandingComponent {
   ) { }
 
   public user: string = "";  // Declare the user input property
+  public userData: any; // use the appropriate type here instead of 'any' if known
+  public availabilityData: any; // use the appropriate type here instead of 'any' if known
 
   /**
    * *****************************************************
@@ -25,12 +27,12 @@ export class LandingComponent {
   getActiveUser = () => {
     this.profileService.getActiveUser(environment.prozToken).subscribe(
       response => {
-        alert('Get user successful')
-        console.log(response)
+        this.userData = response;
+
       },
       error => {
-        alert('Get user failed')
-        console.log(error)
+        this.userData = error
+
       }
     )
   }
@@ -38,26 +40,26 @@ export class LandingComponent {
   getUsers = () => {
     this.profileService.getUsers(environment.prozToken).subscribe(
       response => {
-        alert('Get users successful')
-        console.log(response)
+        this.userData = response;
+
       },
       error => {
-        alert('Get users failed')
-        console.log(error)
+        this.userData = error
+
       }
     )
   }
 
   getUser = () => {
-    const userUuid = 'd52bf434-6566-4b1c-b52e-1f296478b767'
+    const userUuid = environment.testUuid
     this.profileService.getUser(userUuid, environment.prozToken).subscribe(
       response => {
-        alert('Get user successful')
-        console.log(response)
+        this.userData = response;
+
       },
       error => {
-        alert('Get user failed')
-        console.log(error)
+        this.userData = error
+
       }
     )
   }
@@ -69,36 +71,36 @@ export class LandingComponent {
    */
 
   getAvailability = () => {
-    const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
+    const uuid = environment.testUuid
     this.userAvailabilityService.getAvailability(uuid, environment.prozToken).subscribe(
       response => {
-        alert('Get availability successful')
-        console.log(response)
+        this.availabilityData = response
+
       },
       error => {
-        alert('Get availability failed')
-        console.log(error)
+        this.availabilityData = error
+
       }
     )
   }
 
   getAvailabilityOnDate = () => {
-    const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
+    const uuid = environment.testUuid
     const date = '2020-10-01'
     this.userAvailabilityService.getAvailabilityOnDate(uuid, date, environment.prozToken).subscribe(
       response => {
-        alert('Get availability on date successful')
-        console.log(response)
+        this.availabilityData = response
+
       },
       error => {
-        alert('Get availability on date failed')
-        console.log(error)
+        this.availabilityData = error
+
       }
     )
   }
 
   setAvailability = () => {
-    const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
+    const uuid = environment.testUuid
     const data = {
       "availability": [
         {
@@ -115,18 +117,18 @@ export class LandingComponent {
     }
     this.userAvailabilityService.setAvailability(uuid, data, environment.prozToken).subscribe(
       response => {
-        alert('Set availability successful')
-        console.log(response)
+        this.availabilityData = response
+
       },
       error => {
-        alert('Set availability failed')
-        console.log(error)
+        this.availabilityData = error
+
       }
     )
   }
 
   setAvailabilityOnDate = () => {
-    const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
+    const uuid = environment.testUuid
     const date = '2020-10-01'
     const data = {
       "available": true,
@@ -139,12 +141,12 @@ export class LandingComponent {
     }
     this.userAvailabilityService.setAvailabilityOnDate(uuid, date, data, environment.prozToken).subscribe(
       response => {
-        alert('Set availability on date successful')
-        console.log(response)
+        this.availabilityData = response
+
       },
       error => {
-        alert('Set availability on date failed')
-        console.log(error)
+        this.availabilityData = error
+
       }
     )
   }
