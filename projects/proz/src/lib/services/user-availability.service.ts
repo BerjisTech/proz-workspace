@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environment/environment';
 import { Observable } from 'rxjs';
 
@@ -31,19 +31,31 @@ export class UserAvailabilityService {
    * 
    **/
 
-  getAvailability(uuid: string): Observable<any> {
-    return this.http.get(`${environment.apiUrl}availability/${uuid}`);
+  getAvailability(uuid: string, token: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${environment.apiUrl}availability/${uuid}`, { headers });
   }
 
-  getAvailabilityOnDate(uuid: string, date: string): Observable<any> {
-    return this.http.get(`${environment.apiUrl}availability/${uuid}/${date}`);
+  getAvailabilityOnDate(uuid: string, date: string, token: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${environment.apiUrl}availability/${uuid}/${date}`, { headers });
   }
 
-  setAvailabilityOnDate(uuid: string, date: string, data: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}availability/${uuid}/${date}`, data);
+  setAvailabilityOnDate(uuid: string, date: string, data: any, token: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put(`${environment.apiUrl}availability/${uuid}/${date}`, data, { headers });
   }
 
-  setAvailability(uuid: string, data: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}availabilities/${uuid}`, data);
+  setAvailability(uuid: string, data: any, token: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put(`${environment.apiUrl}availabilities/${uuid}`, data, { headers });
   }
 }

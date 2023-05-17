@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProfileService } from 'projects/proz/src/lib/services/profile.service';
 import { UserAvailabilityService } from 'projects/proz/src/lib/services/user-availability.service';
+import { environment } from 'projects/proz-test-app/src/environment/environment';
 
 @Component({
   selector: 'app-landing',
@@ -22,7 +23,7 @@ export class LandingComponent {
    * *****************************************************
    */
   getActiveUser = () => {
-    this.profileService.getActiveUser().subscribe(
+    this.profileService.getActiveUser(environment.prozToken).subscribe(
       response => {
         alert('Get user successful')
         console.log(response)
@@ -35,7 +36,7 @@ export class LandingComponent {
   }
 
   getUsers = () => {
-    this.profileService.getUsers().subscribe(
+    this.profileService.getUsers(environment.prozToken).subscribe(
       response => {
         alert('Get users successful')
         console.log(response)
@@ -48,8 +49,8 @@ export class LandingComponent {
   }
 
   getUser = () => {
-    const userUuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
-    this.profileService.getUser(userUuid).subscribe(
+    const userUuid = 'd52bf434-6566-4b1c-b52e-1f296478b767'
+    this.profileService.getUser(userUuid, environment.prozToken).subscribe(
       response => {
         alert('Get user successful')
         console.log(response)
@@ -69,7 +70,7 @@ export class LandingComponent {
 
   getAvailability = () => {
     const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
-    this.userAvailabilityService.getAvailability(uuid).subscribe(
+    this.userAvailabilityService.getAvailability(uuid, environment.prozToken).subscribe(
       response => {
         alert('Get availability successful')
         console.log(response)
@@ -84,7 +85,7 @@ export class LandingComponent {
   getAvailabilityOnDate = () => {
     const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
     const date = '2020-10-01'
-    this.userAvailabilityService.getAvailabilityOnDate(uuid, date).subscribe(
+    this.userAvailabilityService.getAvailabilityOnDate(uuid, date, environment.prozToken).subscribe(
       response => {
         alert('Get availability on date successful')
         console.log(response)
@@ -112,7 +113,7 @@ export class LandingComponent {
         }
       ]
     }
-    this.userAvailabilityService.setAvailability(uuid, data).subscribe(
+    this.userAvailabilityService.setAvailability(uuid, data, environment.prozToken).subscribe(
       response => {
         alert('Set availability successful')
         console.log(response)
@@ -136,7 +137,7 @@ export class LandingComponent {
         }
       ]
     }
-    this.userAvailabilityService.setAvailabilityOnDate(uuid, date, data).subscribe(
+    this.userAvailabilityService.setAvailabilityOnDate(uuid, date, data, environment.prozToken).subscribe(
       response => {
         alert('Set availability on date successful')
         console.log(response)

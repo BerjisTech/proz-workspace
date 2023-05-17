@@ -15,6 +15,8 @@ export class UserAvailabilityIconComponent {
     private userAvailabilityService: UserAvailabilityService
   ) { }
 
+  public token = "";  // Declare the token property
+
   /**
      * *****************************************************
      * User Availability Service
@@ -23,7 +25,7 @@ export class UserAvailabilityIconComponent {
 
   getAvailability = () => {
     const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
-    this.userAvailabilityService.getAvailability(uuid).subscribe(
+    this.userAvailabilityService.getAvailability(uuid, this.token).subscribe(
       response => {
         alert('Get availability successful')
         console.log(response)
@@ -38,7 +40,7 @@ export class UserAvailabilityIconComponent {
   getAvailabilityOnDate = () => {
     const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
     const date = '2020-10-01'
-    this.userAvailabilityService.getAvailabilityOnDate(uuid, date).subscribe(
+    this.userAvailabilityService.getAvailabilityOnDate(uuid, date, this.token).subscribe(
       response => {
         alert('Get availability on date successful')
         console.log(response)
@@ -66,7 +68,7 @@ export class UserAvailabilityIconComponent {
         }
       ]
     }
-    this.userAvailabilityService.setAvailability(uuid, data).subscribe(
+    this.userAvailabilityService.setAvailability(uuid, data, this.token).subscribe(
       response => {
         alert('Set availability successful')
         console.log(response)
@@ -90,7 +92,7 @@ export class UserAvailabilityIconComponent {
         }
       ]
     }
-    this.userAvailabilityService.setAvailabilityOnDate(uuid, date, data).subscribe(
+    this.userAvailabilityService.setAvailabilityOnDate(uuid, date, data, this.token).subscribe(
       response => {
         alert('Set availability on date successful')
         console.log(response)
