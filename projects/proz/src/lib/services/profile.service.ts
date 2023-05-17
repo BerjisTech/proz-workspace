@@ -21,9 +21,6 @@ export class ProfileService {
 
   /**
    * 
-   * @param token 
-   * @returns 
-   * 
    * User : Access ProZ.com user accounts.Show/HideList OperationsExpand Operations
    * GET /user
    * Get user data about viewer
