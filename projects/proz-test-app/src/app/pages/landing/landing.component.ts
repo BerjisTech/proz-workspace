@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'projects/proz/src/lib/services/profile.service';
 import { UserAvailabilityService } from 'projects/proz/src/lib/services/user-availability.service';
 import { environment } from 'projects/proz-test-app/src/environment/environment';
@@ -15,17 +15,50 @@ export class LandingComponent {
     private userAvailabilityService: UserAvailabilityService
   ) { }
 
-  public user: string = "";  // Declare the user input property
-  public userData: any; // use the appropriate type here instead of 'any' if known
-  public availabilityData: any; // use the appropriate type here instead of 'any' if known
+  public user: string = "";
+  public userData: any;
+  public availabilityData: any;
+  public prozToken: string = "";
+
+
+  ngOnInit() {
+    this.prozToken = this.profileService.getToken(environment.prozToken); // Retrieve the token
+    this.getProzToken();
+  }
 
   /**
    * *****************************************************
    * Profile Service
    * *****************************************************
    */
+
+  authenticate = () => {
+    let authUri = this.profileService.authenticateUser(environment.proz_client_id, environment.redirect_uri);
+    window.open(authUri);
+    window.close()
+  }
+
+
+  getProzToken = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+  
+    if (code != null) {
+      this.profileService.getProzToken(code, environment.proz_client_id, environment.proz_client_secret, environment.redirect_uri).subscribe(
+        response => {
+          this.userData = response;
+          this.prozToken = this.profileService.getToken(this.prozToken);
+        },
+        error => {
+          this.userData = error;
+        }
+      );
+    }
+  }
+  
+
   getActiveUser = () => {
-    this.profileService.getActiveUser(environment.prozToken).subscribe(
+    this.profileService.getActiveUser(this.prozToken).subscribe(
       response => {
         this.userData = response;
 
@@ -38,7 +71,7 @@ export class LandingComponent {
   }
 
   getUsers = () => {
-    this.profileService.getUsers(environment.prozToken).subscribe(
+    this.profileService.getUsers(this.prozToken).subscribe(
       response => {
         this.userData = response;
 
@@ -52,7 +85,7 @@ export class LandingComponent {
 
   getUser = () => {
     const userUuid = environment.testUuid
-    this.profileService.getUser(userUuid, environment.prozToken).subscribe(
+    this.profileService.getUser(userUuid, this.prozToken).subscribe(
       response => {
         this.userData = response;
 
@@ -72,7 +105,7 @@ export class LandingComponent {
 
   getAvailability = () => {
     const uuid = environment.testUuid
-    this.userAvailabilityService.getAvailability(uuid, environment.prozToken).subscribe(
+    this.userAvailabilityService.getAvailability(uuid, this.prozToken).subscribe(
       response => {
         this.availabilityData = response
 
@@ -87,7 +120,7 @@ export class LandingComponent {
   getAvailabilityOnDate = () => {
     const uuid = environment.testUuid
     const date = '2020-10-01'
-    this.userAvailabilityService.getAvailabilityOnDate(uuid, date, environment.prozToken).subscribe(
+    this.userAvailabilityService.getAvailabilityOnDate(uuid, date, this.prozToken).subscribe(
       response => {
         this.availabilityData = response
 
@@ -115,7 +148,7 @@ export class LandingComponent {
         }
       ]
     }
-    this.userAvailabilityService.setAvailability(uuid, data, environment.prozToken).subscribe(
+    this.userAvailabilityService.setAvailability(uuid, data, this.prozToken).subscribe(
       response => {
         this.availabilityData = response
 
@@ -139,7 +172,7 @@ export class LandingComponent {
         }
       ]
     }
-    this.userAvailabilityService.setAvailabilityOnDate(uuid, date, data, environment.prozToken).subscribe(
+    this.userAvailabilityService.setAvailabilityOnDate(uuid, date, data, this.prozToken).subscribe(
       response => {
         this.availabilityData = response
 
