@@ -60,15 +60,18 @@ export class ProfileService {
       'code': code,
       'redirect_uri': redirect_uri
     }
+  
     const headers = new HttpHeaders({
       'Authorization': `Basic ${btoa(proz_client_id + ':' + proz_client_secret)}`
     });
+  
     return this.http.post<ProzTokenResponse>(`https://www.proz.com/oauth/token`, data, { headers }).pipe(
       tap(response => {
         this.prozTokenService.setToken(response.access_token); // Use TokenService to store the token
       })
     );
   }
+  
 
   getToken(prozToken: string): string {
     let token = this.prozTokenService.getToken(); // Retrieve the token from ProzTokenService
