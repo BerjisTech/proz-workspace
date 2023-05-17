@@ -1,71 +1,25 @@
-import { Component } from '@angular/core';
-import { ProfileService } from 'projects/proz/src/lib/services/profile.service';
+import { Component, Input  } from '@angular/core';
 import { UserAvailabilityService } from 'projects/proz/src/lib/services/user-availability.service';
 
 @Component({
-  selector: 'app-landing',
-  templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss']
+  selector: 'lib-user-availability-icon',
+  templateUrl: './user-availability-icon.component.html',
+  styleUrls: ['./user-availability-icon.component.css']
 })
 
-export class LandingComponent {
+export class UserAvailabilityIconComponent {
+
+  @Input() user: any;  // Declare the user input property
+
   constructor(
-    private profileService: ProfileService,
     private userAvailabilityService: UserAvailabilityService
   ) { }
 
-  public user: string = "";  // Declare the user input property
-
   /**
-   * *****************************************************
-   * Profile Service
-   * *****************************************************
-   */
-  getActiveUser = () => {
-    this.profileService.getActiveUser().subscribe(
-      response => {
-        alert('Get user successful')
-        console.log(response)
-      },
-      error => {
-        alert('Get user failed')
-        console.log(error)
-      }
-    )
-  }
-
-  getUsers = () => {
-    this.profileService.getUsers().subscribe(
-      response => {
-        alert('Get users successful')
-        console.log(response)
-      },
-      error => {
-        alert('Get users failed')
-        console.log(error)
-      }
-    )
-  }
-
-  getUser = () => {
-    const userUuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
-    this.profileService.getUser(userUuid).subscribe(
-      response => {
-        alert('Get user successful')
-        console.log(response)
-      },
-      error => {
-        alert('Get user failed')
-        console.log(error)
-      }
-    )
-  }
-
-  /**
-   * *****************************************************
-   * User Availability Service
-   * *****************************************************
-   */
+     * *****************************************************
+     * User Availability Service
+     * *****************************************************
+     */
 
   getAvailability = () => {
     const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
@@ -147,5 +101,4 @@ export class LandingComponent {
       }
     )
   }
-
 }

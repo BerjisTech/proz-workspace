@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { ProzComponent } from './proz.component';
+import { UserAvailabilityIconComponent } from './component/user-availability-icon/user-availability-icon.component';
 
 
 
 @NgModule({
   declarations: [
-    ProzComponent
+    ProzComponent,
+    UserAvailabilityIconComponent
   ],
   imports: [
   ],
   exports: [
-    ProzComponent
+    ProzComponent,
+    UserAvailabilityIconComponent
   ]
 })
 export class ProzModule { }
