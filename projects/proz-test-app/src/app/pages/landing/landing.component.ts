@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'projects/proz/src/lib/services/profile.service';
 import { UserAvailabilityService } from 'projects/proz/src/lib/services/user-availability.service';
+import { BadgesService } from 'projects/proz/src/lib/services/badges.service';
 import { environment } from 'projects/proz-test-app/src/environment/environment';
 import { WorkingHours, DayAvailability, User, ActiveUser, UserUUIDResponse, UsersResponse, DayAvailabilityResponse, AvailabilityResponse, Availability } from 'projects/proz/src/lib/interfaces/user.interface';
 
@@ -11,9 +12,12 @@ import { WorkingHours, DayAvailability, User, ActiveUser, UserUUIDResponse, User
 })
 
 export class LandingComponent {
+
   constructor(
     private profileService: ProfileService,
-    private userAvailabilityService: UserAvailabilityService
+    private userAvailabilityService: UserAvailabilityService,
+    private badgesService: BadgesService,
+
   ) { }
 
   user: string = "";
@@ -26,6 +30,8 @@ export class LandingComponent {
   prozClientSecret = environment.production ? environment.prod_proz_client_secret : environment.dev_proz_client_secret;
   prozTestUuid = environment.production ? environment.prod_proz_test_uuid : environment.dev_proz_test_uuid;
 
+  plusMembershipBadgeUrl = this.badgesService.getPlusMembershipBadge(true)
+  certificationBadgeUrl = this.badgesService.getCertificationBadge(true)
 
   ngOnInit() {
     this.prozToken = this.profileService.getToken(this.prozToken); // Retrieve the token

@@ -7,12 +7,12 @@ export class BadgesService {
 
   constructor() { }
 
-  getPlusMembershipBadge = (plusMembership: string) => {
-    return plusMembership && 'https://sslcdn.proz.com/zf/images/professional-membership/plus_badge.png'
+  getPlusMembershipBadge = (isProzMember: boolean) => {
+    return isProzMember ? 'https://sslcdn.proz.com/zf/images/professional-membership/plus_badge.png' : null;
   }
 
-  getCertificationBadge = (certification: string) => {
-    return certification && 'https://sslcdn.proz.com/zf/images/proz-nliv-homepage/home-cpn.png'
+  getCertificationBadge = (isCpn: boolean) => {
+    return isCpn ? 'https://sslcdn.proz.com/zf/images/proz-nliv-homepage/home-cpn.png' : null;
   }
 
 }

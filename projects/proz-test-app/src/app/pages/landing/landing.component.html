@@ -1,18 +1,34 @@
 <div class="w-screen h-screen bg-slate-100 p-3">
+    <span class="table fs-3">User Badges</span>
+    <hr />
+    <div class="d-flex align-items-center justify-content-start gap-2">
+        <span
+            class="d-flex align-items-center justify-content-start gap-2 p-3 text-slate-800 border-1 border-solid border-slate-950 rounded-md"
+            role="button">Plus Membership Badge: <img [src]="plusMembershipBadgeUrl" alt="getPlusMembershipBadge"
+                class="h-[30px]" /></span>
+        <span
+            class="d-flex align-items-center justify-content-start gap-2 p-3 text-slate-800 border-1 border-solid border-slate-950 rounded-md"
+            role="button">Certified Proz Network Badge: <img [src]="certificationBadgeUrl" alt="getCertificationBadge"
+                class="h-[30px]" /></span>
+    </div>
+
+    <hr />
     <span class="table fs-3">User Actions</span>
-    <lib-signin-with-proz [prozClientId]="prozClientId" [prozRedirectUri]="prozRedirectUri"></lib-signin-with-proz>
-    <span (click)="authenticate()"
-        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
-        role="button">Authenticate</span>
-    <span (click)="getActiveUser()"
-        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
-        role="button">Get User</span>
-    <span (click)="getUsers()"
-        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
-        role="button">Get Users</span>
-    <span (click)="getUser()"
-        class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
-        role="button">Get users/uuid</span>
+    <div class="d-flex align-items-center gap-2 justify-content-start">
+        <lib-signin-with-proz [prozClientId]="prozClientId" [prozRedirectUri]="prozRedirectUri"></lib-signin-with-proz>
+        <span (click)="authenticate()"
+            class="p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+            role="button">Authenticate</span>
+        <span (click)="getActiveUser()"
+            class="p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+            role="button">Get User</span>
+        <span (click)="getUsers()"
+            class="p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+            role="button">Get Users</span>
+        <span (click)="getUser()"
+            class="p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
+            role="button">Get users/uuid</span>
+    </div>
     <hr />
     <div *ngIf="userData">
         <span>Get User Data Response</span>
