@@ -72,6 +72,128 @@ _Parameters_
 2. `token`: The ProZ.com token.
 _Returns_: An observable that emits the user's details.
 
+## ProfileService Usage Example
+
+The `ProfileService` provides various methods to interact with user profiles. Below are the examples of how you can use this service.
+
+### Step 1: Import the ProfileService
+
+First, import the `ProfileService` into the component where you want to use it.
+
+```typescript
+import { ProfileService } from './profile.service';
+```
+
+### Step 2: Inject the ProfileService
+Inject the ProfileService into your component's constructor.
+
+```typescript
+constructor(private profileService: ProfileService) { }
+```
+### Step 3: Use the ProfileService
+Now you can use the methods provided by ProfileService in your component.
+
+```typescript
+this.profileService.authenticateUser('client-id', 'redirect-uri').subscribe(response => {
+  console.log(response);  // Prints the authentication URL
+});
+
+this.profileService.getProzToken('code', 'client-id', 'client-secret', 'uri').subscribe(response => {
+  console.log(response);  // Prints the received token
+});
+
+console.log(this.profileService.getToken('token'));  // Prints the token
+
+this.profileService.getActiveUser('token').subscribe(response => {
+  console.log(response);  // Prints the active user's data
+});
+
+this.profileService.getUsers('token', ['uuid1', 'uuid2']).subscribe(response => {
+  console.log(response);  // Prints the users' data
+});
+
+this.profileService.getUser('uuid', 'token').subscribe(response => {
+  console.log(response);  // Prints the user's data
+});
+```
+
+_Remember, these methods are asynchronous, so they should be used within an Observable context, as shown above. You can also use async-await syntax if you prefer._
+
+_Remember to replace placeholders like 'client-id', 'redirect-uri', 'code', 'client-secret', 'uri', 'token', 'uuid1', 'uuid2', and 'uuid' with your actual values._
+
+
+# UserAvailabilityService Documentation
+`UserAvailabilityService` is a service class in Angular that helps in managing a user's availability. This class has several methods that allow us to interact with an API for fetching and updating the availability of a user.
+
+## Methods
+### getAvailability()
+`getAvailability(uuid: string, token: any): Observable<AvailabilityResponse>`
+
+This method fetches the user availability from the API. It takes the uuid of the user and a token for authentication as parameters and returns an Observable that will emit the user availability.
+
+_Usage_
+```typescript
+let uuid = 'user-uuid'; 
+let token = 'auth-token'; 
+userAvailabilityService.getAvailability(uuid, token).subscribe(
+    availability => { 
+        console.log(availability); 
+    }
+);
+```
+
+### getAvailabilityOnDate()
+`getAvailabilityOnDate(uuid: string, date: string, token: any): Observable<DayAvailabilityResponse>`
+
+This method fetches the user availability for a specific date from the API. It takes the uuid of the user, a date string in `YYYY-MM-DD` format, and a token for authentication as parameters and returns an Observable that will emit the user availability for the specific date.
+
+_Usage_
+```typescript
+let uuid = 'user-uuid'; 
+let date = '2023-05-18'; 
+let token = 'auth-token'; 
+userAvailabilityService.getAvailabilityOnDate(uuid, date, token).subscribe(
+    availability => { 
+        console.log(availability); 
+    }
+);
+```
+
+### setAvailabilityOnDate()
+`setAvailabilityOnDate(uuid: string, date: string, data: Availability, token: any): Observable<DayAvailabilityResponse>`
+
+This method updates the user availability for a specific date on the API. It takes the uuid of the user, a date string in `YYYY-MM-DD` format, an Availability object that represents the new availability data, and a token for authentication as parameters and returns an Observable that will emit the updated user availability for the specific date.
+
+_Usage_
+```typescript
+let uuid = 'user-uuid'; 
+let date = '2023-05-18'; 
+let availability: Availability = {/* availability data */}; 
+let token = 'auth-token'; userAvailabilityService.setAvailabilityOnDate(uuid, date, availability, token).subscribe(
+    updatedAvailability => { 
+    console.log(updatedAvailability); 
+    }
+);
+```
+
+### setAvailability()
+`setAvailability(uuid: string, data: Availability, token: any): Observable<DayAvailabilityResponse[]>`
+
+This method updates the user availability for multiple dates on the API. It takes the uuid of the user, an Availability object that represents the new availability data, and a token for authentication as parameters and returns an Observable that will emit an array of the updated user availability for the specific dates.
+
+_Usage_
+```typescript
+Copy code
+let uuid = 'user-uuid'; 
+let availability: Availability = {/* availability data for multiple dates */}; 
+let token = 'auth-token'; 
+userAvailabilityService.setAvailability(uuid, availability, token).subscribe(
+    updatedAvailabilities => { 
+        console.log(updatedAvailabilities); 
+    }
+);
+```
+
 
 # Badges Service
 
@@ -94,7 +216,7 @@ The Badges Service is responsible for providing image URLs for Plus Membership a
 The methods in this service do not throw errors. They return null if the input boolean value is false.
 
 ## Usage Example
-```ts
+```typescript
 const badgesService = new BadgesService();
 
 // Get Plus Membership Badge URL
