@@ -1,15 +1,15 @@
 .signInWithProz{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     gap: 10px;
     border-radius: 5px;
     background: #245252;
     color: #fff;
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
-
+    
     &:hover{
         background: #186362;
     }
