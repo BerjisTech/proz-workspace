@@ -19,13 +19,15 @@ export class LandingComponent {
   user: string = "";
   userData = {} as User | ActiveUser | UserUUIDResponse | UsersResponse;
   availabilityData = {} as WorkingHours | DayAvailability | DayAvailabilityResponse | AvailabilityResponse | DayAvailabilityResponse[] | Availability;
-  prozToken: string = "";
-  prozClientId = environment.proz_client_id;
-  prozRedirectUri = environment.redirect_uri;
+  prozToken = environment.production ? environment.prod_proz_token : environment.dev_proz_token;
+  prozClientId = environment.production ? environment.prod_proz_client_id : environment.dev_proz_client_id;
+  prozRedirectUri = environment.production ? environment.prod_redirect_uri : environment.dev_redirect_uri;
+  prozClientSecret = environment.production ? environment.prod_proz_client_secret : environment.dev_proz_client_secret;
+  prozTestUuid = environment.production ? environment.prod_proz_test_uuid : environment.dev_proz_test_uuid;
 
 
   ngOnInit() {
-    this.prozToken = this.profileService.getToken(environment.prozToken); // Retrieve the token
+    this.prozToken = this.profileService.getToken(this.prozToken); // Retrieve the token
     this.getProzToken();
   }
 
@@ -36,7 +38,7 @@ export class LandingComponent {
    */
 
   authenticate = () => {
-    let authUri = this.profileService.authenticateUser(environment.proz_client_id, environment.redirect_uri);
+    let authUri = this.profileService.authenticateUser(this.prozClientId, this.prozRedirectUri);
     window.open(authUri);
     window.close()
   }
@@ -47,7 +49,7 @@ export class LandingComponent {
     const code = urlParams.get('code');
 
     if (code != null) {
-      this.profileService.getProzToken(code, environment.proz_client_id, environment.proz_client_secret, environment.redirect_uri).subscribe(
+      this.profileService.getProzToken(code, this.prozClientId, this.prozClientSecret, this.prozRedirectUri).subscribe(
         response => {
           this.userData = response;
           this.prozToken = this.profileService.getToken(this.prozToken);
@@ -83,7 +85,7 @@ export class LandingComponent {
   }
 
   getUser = () => {
-    const userUuid = environment.testUuid
+    const userUuid = this.prozTestUuid
     this.profileService.getUser(userUuid, this.prozToken).subscribe(
       (response: UserUUIDResponse) => {
         this.userData = response;
@@ -101,7 +103,7 @@ export class LandingComponent {
    */
 
   getAvailability = () => {
-    const uuid = environment.testUuid
+    const uuid = this.prozTestUuid
     this.userAvailabilityService.getAvailability(uuid, this.prozToken).subscribe(
       (response: AvailabilityResponse) => {
         this.availabilityData = response
@@ -115,7 +117,7 @@ export class LandingComponent {
   }
 
   getAvailabilityOnDate = () => {
-    const uuid = environment.testUuid
+    const uuid = this.prozTestUuid
     const date = '2020-10-01'
     this.userAvailabilityService.getAvailabilityOnDate(uuid, date, this.prozToken).subscribe(
       (response: DayAvailabilityResponse) => {
@@ -128,7 +130,7 @@ export class LandingComponent {
   }
 
   setAvailability = () => {
-    const uuid = environment.testUuid
+    const uuid = this.prozTestUuid
     const data: Availability = {
       available: true,
       hours: [
@@ -150,7 +152,7 @@ export class LandingComponent {
   }
 
   setAvailabilityOnDate = () => {
-    const uuid = environment.testUuid
+    const uuid = this.prozTestUuid
     const date = '2020-10-01';
     const data: Availability = {
       available: true,
