@@ -104,4 +104,29 @@ console.log(plusMembershipBadgeUrl); // 'https://sslcdn.proz.com/zf/images/profe
 // Get Certification Badge URL
 const certificationBadgeUrl = badgesService.getCertificationBadge(false);
 console.log(certificationBadgeUrl); // null
+```
 
+# ProzTokenService
+
+## Overview
+`ProzTokenService` is an Angular service that manages the state of a single token in memory. This service can be used to set and get the token value.
+
+## Usage
+To use this service, it should be injected in a component or another service.
+
+### setToken
+This method is used to set the token in memory.
+
+```typescript
+prozTokenService.setToken('your-token-value');
+```
+
+### getToken
+This method is used to retrieve the token from memory.
+
+```typescript
+const token = prozTokenService.getToken();
+```
+
+### Testing
+This service is tested to ensure that `setToken` correctly stores a token value and `getToken` correctly retrieves the stored token. Additionally, it tests the scenario when no token is set or the token is explicitly set to `null`, `getToken` should return `null`.

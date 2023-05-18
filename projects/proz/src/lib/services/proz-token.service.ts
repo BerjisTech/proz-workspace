@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class ProzTokenService {
   private token: string | null = null;
 
-  setToken(token: string): void {
+  setToken(token: string | null): void {
     this.token = token;
   }
 
