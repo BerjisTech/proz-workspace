@@ -183,7 +183,6 @@ This method updates the user availability for multiple dates on the API. It take
 
 _Usage_
 ```typescript
-Copy code
 let uuid = 'user-uuid'; 
 let availability: Availability = {/* availability data for multiple dates */}; 
 let token = 'auth-token'; 
