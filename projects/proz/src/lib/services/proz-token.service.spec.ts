@@ -27,7 +27,7 @@ describe('ProzTokenService', () => {
     });
 
     it('should return null if no token is stored', () => {
-      service.setToken(null);
+      service.setToken('null');
       expect(service.getToken()).toBeNull();
     });
   });
