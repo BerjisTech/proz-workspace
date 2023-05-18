@@ -89,11 +89,21 @@ export interface WorkingHours {
     available_weekends: boolean;
 }
 
+export interface Availability {
+    available: boolean;
+    hours: AvailableHours[]
+}
+
+export interface AvailableHours {
+    start: string;
+    end: string;
+}
+
 export interface DayAvailability {
     self_link: string;
     user: string;
     date: string;
-    availability: number;
+    availability: Availability
 }
 
 export interface AvailabilityResponse {

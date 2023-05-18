@@ -1,5 +1,7 @@
 import { Component, Input  } from '@angular/core';
 import { UserAvailabilityService } from 'projects/proz/src/lib/services/user-availability.service';
+import { ProzTokenService } from '../../services/proz-token.service';
+import { Availability, DayAvailabilityResponse } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'lib-user-availability-icon',
@@ -12,10 +14,11 @@ export class UserAvailabilityIconComponent {
   @Input() user: any;  // Declare the user input property
 
   constructor(
-    private userAvailabilityService: UserAvailabilityService
+    private userAvailabilityService: UserAvailabilityService,
+    private prozTokenService: ProzTokenService
   ) { }
 
-  public token = "";  // Declare the token property
+  prozToken = this.prozTokenService.getToken(); // Retrieve the token
 
   /**
      * *****************************************************
@@ -25,7 +28,7 @@ export class UserAvailabilityIconComponent {
 
   getAvailability = () => {
     const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
-    this.userAvailabilityService.getAvailability(uuid, this.token).subscribe(
+    this.userAvailabilityService.getAvailability(uuid, this.prozToken).subscribe(
       response => {
         alert('Get availability successful')
         console.log(response)
@@ -40,7 +43,7 @@ export class UserAvailabilityIconComponent {
   getAvailabilityOnDate = () => {
     const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
     const date = '2020-10-01'
-    this.userAvailabilityService.getAvailabilityOnDate(uuid, date, this.token).subscribe(
+    this.userAvailabilityService.getAvailabilityOnDate(uuid, date, this.prozToken).subscribe(
       response => {
         alert('Get availability on date successful')
         console.log(response)
@@ -52,29 +55,22 @@ export class UserAvailabilityIconComponent {
     )
   }
 
-  setAvailability = () => {
-    const uuid = 'b8d6f0d0-0c2a-11eb-9c6e-0242ac130002'
-    const data = {
-      "availability": [
+  setAvailability = (uuid: string) => {
+    const data: Availability = {
+      available: true,
+      hours: [
         {
-          "date": "2020-10-01",
-          "available": true,
-          "hours": [
-            {
-              "start": "09:00",
-              "end": "18:00"
-            }
-          ]
+          start: "09:00",
+          end: "18:00"
         }
       ]
     }
-    this.userAvailabilityService.setAvailability(uuid, data, this.token).subscribe(
-      response => {
-        alert('Set availability successful')
+
+    this.userAvailabilityService.setAvailability(uuid, data, this.prozToken).subscribe(
+      (response: DayAvailabilityResponse[]) => {
         console.log(response)
       },
-      error => {
-        alert('Set availability failed')
+      (error: any) => {
         console.log(error)
       }
     )
@@ -92,7 +88,7 @@ export class UserAvailabilityIconComponent {
         }
       ]
     }
-    this.userAvailabilityService.setAvailabilityOnDate(uuid, date, data, this.token).subscribe(
+    this.userAvailabilityService.setAvailabilityOnDate(uuid, date, data, this.prozToken).subscribe(
       response => {
         alert('Set availability on date successful')
         console.log(response)

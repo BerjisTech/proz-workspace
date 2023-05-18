@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environment/environment';
 import { Observable } from 'rxjs';
-import { AvailabilityResponse, DayAvailabilityResponse, DayAvailability } from '../interfaces/user.interface';
+import { AvailabilityResponse, DayAvailabilityResponse, DayAvailability, Availability } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -46,14 +46,14 @@ export class UserAvailabilityService {
     return this.http.get<DayAvailabilityResponse>(`${environment.apiUrl}availability/${uuid}/${date}`, { headers });
   }
   
-  setAvailabilityOnDate(uuid: string, date: string, data: DayAvailability, token: any): Observable<DayAvailabilityResponse> {
+  setAvailabilityOnDate(uuid: string, date: string, data: Availability, token: any): Observable<DayAvailabilityResponse> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
     return this.http.put<DayAvailabilityResponse>(`${environment.apiUrl}availability/${uuid}/${date}`, data, { headers });
   }
   
-  setAvailability(uuid: string, data: DayAvailability[], token: any): Observable<DayAvailabilityResponse[]> {
+  setAvailability(uuid: string, data: Availability, token: any): Observable<DayAvailabilityResponse[]> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });

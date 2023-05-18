@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'projects/proz/src/lib/services/profile.service';
 import { UserAvailabilityService } from 'projects/proz/src/lib/services/user-availability.service';
 import { environment } from 'projects/proz-test-app/src/environment/environment';
+import { WorkingHours, DayAvailability, User, ActiveUser, UserUUIDResponse, UsersResponse, DayAvailabilityResponse, AvailabilityResponse, Availability } from 'projects/proz/src/lib/interfaces/user.interface';
 
 @Component({
   selector: 'app-landing',
@@ -16,8 +17,8 @@ export class LandingComponent {
   ) { }
 
   user: string = "";
-  userData: any;
-  availabilityData: any;
+  userData = {} as User | ActiveUser | UserUUIDResponse | UsersResponse;
+  availabilityData = {} as WorkingHours | DayAvailability | DayAvailabilityResponse | AvailabilityResponse | DayAvailabilityResponse[] | Availability;
   prozToken: string = "";
   prozClientId = environment.proz_client_id;
   prozRedirectUri = environment.redirect_uri;
@@ -44,7 +45,7 @@ export class LandingComponent {
   getProzToken = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-  
+
     if (code != null) {
       this.profileService.getProzToken(code, environment.proz_client_id, environment.proz_client_secret, environment.redirect_uri).subscribe(
         response => {
@@ -57,30 +58,26 @@ export class LandingComponent {
       );
     }
   }
-  
+
 
   getActiveUser = () => {
     this.profileService.getActiveUser(this.prozToken).subscribe(
-      response => {
+      (response: ActiveUser) => {
         this.userData = response;
-
       },
-      error => {
+      (error: any) => {
         this.userData = error
-
       }
     )
   }
 
   getUsers = () => {
     this.profileService.getUsers(this.prozToken).subscribe(
-      response => {
+      (response: UsersResponse) => {
         this.userData = response;
-
       },
-      error => {
+      (error: any) => {
         this.userData = error
-
       }
     )
   }
@@ -88,13 +85,11 @@ export class LandingComponent {
   getUser = () => {
     const userUuid = environment.testUuid
     this.profileService.getUser(userUuid, this.prozToken).subscribe(
-      response => {
+      (response: UserUUIDResponse) => {
         this.userData = response;
-
       },
-      error => {
+      (error: any) => {
         this.userData = error
-
       }
     )
   }
@@ -108,11 +103,11 @@ export class LandingComponent {
   getAvailability = () => {
     const uuid = environment.testUuid
     this.userAvailabilityService.getAvailability(uuid, this.prozToken).subscribe(
-      response => {
+      (response: AvailabilityResponse) => {
         this.availabilityData = response
 
       },
-      error => {
+      (error: any) => {
         this.availabilityData = error
 
       }
@@ -123,65 +118,56 @@ export class LandingComponent {
     const uuid = environment.testUuid
     const date = '2020-10-01'
     this.userAvailabilityService.getAvailabilityOnDate(uuid, date, this.prozToken).subscribe(
-      response => {
+      (response: DayAvailabilityResponse) => {
         this.availabilityData = response
-
       },
-      error => {
+      (error: any) => {
         this.availabilityData = error
-
       }
     )
   }
 
   setAvailability = () => {
     const uuid = environment.testUuid
-    const data = {
-      "availability": [
+    const data: Availability = {
+      available: true,
+      hours: [
         {
-          "date": "2020-10-01",
-          "available": true,
-          "hours": [
-            {
-              "start": "09:00",
-              "end": "18:00"
-            }
-          ]
+          start: "09:00",
+          end: "18:00"
         }
       ]
     }
+
     this.userAvailabilityService.setAvailability(uuid, data, this.prozToken).subscribe(
-      response => {
+      (response: DayAvailabilityResponse[]) => {
         this.availabilityData = response
-
       },
-      error => {
+      (error: any) => {
         this.availabilityData = error
-
       }
     )
   }
 
   setAvailabilityOnDate = () => {
     const uuid = environment.testUuid
-    const date = '2020-10-01'
-    const data = {
-      "available": true,
-      "hours": [
+    const date = '2020-10-01';
+    const data: Availability = {
+      available: true,
+      hours: [
         {
-          "start": "09:00",
-          "end": "18:00"
+          start: "09:00",
+          end: "18:00"
         }
       ]
-    }
+    };
+
     this.userAvailabilityService.setAvailabilityOnDate(uuid, date, data, this.prozToken).subscribe(
-      response => {
+      (response: DayAvailabilityResponse) => {
         this.availabilityData = response
-
       },
-      error => {
+      (error: any) => {
         this.availabilityData = error
-
       }
     )
   }
