@@ -15,10 +15,12 @@ export class LandingComponent {
     private userAvailabilityService: UserAvailabilityService
   ) { }
 
-  public user: string = "";
-  public userData: any;
-  public availabilityData: any;
-  public prozToken: string = "";
+  user: string = "";
+  userData: any;
+  availabilityData: any;
+  prozToken: string = "";
+  prozClientId = environment.proz_client_id;
+  prozRedirectUri = environment.redirect_uri;
 
 
   ngOnInit() {

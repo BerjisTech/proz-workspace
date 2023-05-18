@@ -1,5 +1,6 @@
 <div class="w-screen h-screen bg-slate-100 p-3">
     <span class="table fs-3">User Actions</span>
+    <lib-signin-with-proz [prozClientId]="prozClientId" [prozRedirectUri]="prozRedirectUri"></lib-signin-with-proz>
     <span (click)="authenticate()"
         class="inline-table m-2 p-3 fs-4 text-slate-100 bg-slate-950 hover:text-slate-950 hover:bg-slate-100 border-1 border-solid border-slate-950 rounded-md"
         role="button">Authenticate</span>
