@@ -1,24 +1,34 @@
-# Proz
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.
 
-## Code scaffolding
+# Badges Service
 
-Run `ng generate component component-name --project proz` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project proz`.
-> Note: Don't forget to add `--project proz` or else it will be added to the default project in your `angular.json` file. 
+## Overview
+The Badges Service is responsible for providing image URLs for Plus Membership and Certified Proz Network badges based on a user's membership status. It provides two main methods.
 
-## Build
+## Functional Requirements
+1. `getPlusMembershipBadge(isProzMember: boolean): string | null` - Returns the URL of the Plus Membership badge image if the user is a Proz member, otherwise it returns null.
+2. `getCertificationBadge(isCpn: boolean): string | null` - Returns the URL of the Certified Proz Network badge image if the user is a Certified Proz Network member, otherwise it returns null.
 
-Run `ng build proz` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Non-Functional Requirements
+1. Usability: The service should return clear and informative URLs for the badges based on the user's membership status.
+2. Performance: The service methods should have negligible impact on the application's performance as they are merely returning static values based on a condition.
 
-## Publishing
+## Constraints and Assumptions
+1. Constraints: This service assumes that the image URLs returned by the methods will always be valid and accessible.
+2. Assumptions: The input to the methods will always be a boolean indicating the membership status of the user.
 
-After building your library with `ng build proz`, go to the dist folder `cd dist/proz` and run `npm publish`.
+## Error Handling
+The methods in this service do not throw errors. They return null if the input boolean value is false.
 
-## Running unit tests
+## Usage Example
+```ts
+const badgesService = new BadgesService();
 
-Run `ng test proz` to execute the unit tests via [Karma](https://karma-runner.github.io).
+// Get Plus Membership Badge URL
+const plusMembershipBadgeUrl = badgesService.getPlusMembershipBadge(true);
+console.log(plusMembershipBadgeUrl); // 'https://sslcdn.proz.com/zf/images/professional-membership/plus_badge.png'
 
-## Further help
+// Get Certification Badge URL
+const certificationBadgeUrl = badgesService.getCertificationBadge(false);
+console.log(certificationBadgeUrl); // null
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
