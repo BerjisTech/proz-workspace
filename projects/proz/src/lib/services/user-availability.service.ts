@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environment/environment';
 import { Observable } from 'rxjs';
+import { AvailabilityResponse, DayAvailabilityResponse, DayAvailability } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,31 +32,32 @@ export class UserAvailabilityService {
    * 
    **/
 
-  getAvailability(uuid: string, token: any): Observable<any> {
+  getAvailability(uuid: string, token: any): Observable<AvailabilityResponse> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get(`${environment.apiUrl}availability/${uuid}`, { headers });
+    return this.http.get<AvailabilityResponse>(`${environment.apiUrl}availability/${uuid}`, { headers });
   }
-
-  getAvailabilityOnDate(uuid: string, date: string, token: any): Observable<any> {
+  
+  getAvailabilityOnDate(uuid: string, date: string, token: any): Observable<DayAvailabilityResponse> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get(`${environment.apiUrl}availability/${uuid}/${date}`, { headers });
+    return this.http.get<DayAvailabilityResponse>(`${environment.apiUrl}availability/${uuid}/${date}`, { headers });
   }
-
-  setAvailabilityOnDate(uuid: string, date: string, data: any, token: any): Observable<any> {
+  
+  setAvailabilityOnDate(uuid: string, date: string, data: DayAvailability, token: any): Observable<DayAvailabilityResponse> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put(`${environment.apiUrl}availability/${uuid}/${date}`, data, { headers });
+    return this.http.put<DayAvailabilityResponse>(`${environment.apiUrl}availability/${uuid}/${date}`, data, { headers });
   }
-
-  setAvailability(uuid: string, data: any, token: any): Observable<any> {
+  
+  setAvailability(uuid: string, data: DayAvailability[], token: any): Observable<DayAvailabilityResponse[]> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put(`${environment.apiUrl}availabilities/${uuid}`, data, { headers });
+    return this.http.put<DayAvailabilityResponse[]>(`${environment.apiUrl}availabilities/${uuid}`, data, { headers });
   }
+  
 }

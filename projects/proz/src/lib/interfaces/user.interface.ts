@@ -1,3 +1,4 @@
+// User API
 export interface ProzTokenResponse {
     access_token: string,
     expires_in: number,
@@ -72,8 +73,34 @@ export interface ActiveUser {
     employers: Employer[];
 }
 
-// And for the user/uuid response:
-
 export interface UserUUIDResponse {
     user: User;
+}
+
+
+// Availability API
+export interface WorkingHours {
+    self_link: string;
+    user: string;
+    workday_start: string;
+    workday_end: string;
+    opted_out: boolean;
+    available_off_hours: boolean;
+    available_weekends: boolean;
+}
+
+export interface DayAvailability {
+    self_link: string;
+    user: string;
+    date: string;
+    availability: number;
+}
+
+export interface AvailabilityResponse {
+    working_hours: WorkingHours;
+    days_availability: DayAvailability[];
+}
+
+export interface DayAvailabilityResponse {
+    day_availability: DayAvailability;
 }
