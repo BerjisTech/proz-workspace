@@ -1,10 +1,10 @@
 export const environment = {
-    production: false,
+    production: true,
     // Prod
     prod_proz_token: 'ea2b121282fa4f74749ab5440934b1e0f888ccce',
     prod_proz_test_uuid: '3fe4056c-a55e-4d8a-9f86-d2d9eb2bd78a',
     prod_proz_client_id: 'f45664cfa9e1a2b6a8e74f731b954fff13624fce',
-    prod_redirect_uri: 'http://localhost:4200/',
+    prod_redirect_uri: 'https://1a36-41-90-179-236.ngrok-free.app/',
     prod_proz_client_secret: '42bf68b259e6ca758be3663db01d22ab482020c6',
     // Test
     dev_proz_token: 'a1c1cb3a144d22586bd03a53a068a9e93f4827de',

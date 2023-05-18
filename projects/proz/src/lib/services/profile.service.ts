@@ -82,11 +82,11 @@ export class ProfileService {
     return this.http.get<ActiveUser>(`${environment.apiUrl}user`, { headers });
   }
 
-  getUsers(token: string): Observable<UsersResponse> { // Get a collection of UserSummary records from a comma-separated list of UUIDs.
+  getUsers(token: string, uuids: string[]): Observable<UsersResponse> { // Get a collection of UserSummary records from a comma-separated list of UUIDs.
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<UsersResponse>(`${environment.apiUrl}users`, { headers });
+    return this.http.get<UsersResponse>(`${environment.apiUrl}users?uuids=${uuids}`, { headers });
   }
 
   getUser(userUuid: String, token: string): Observable<UserUUIDResponse> { // Get a single UserSummary record for a specified UUID.

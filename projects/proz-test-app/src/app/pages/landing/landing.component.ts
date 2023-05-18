@@ -17,6 +17,7 @@ export class LandingComponent {
   ) { }
 
   user: string = "";
+  uuids: string[] = ['d52bf434-6566-4b1c-b52e-1f296478b767', '3fe4056c-a55e-4d8a-9f86-d2d9eb2bd78a'];
   userData = {} as User | ActiveUser | UserUUIDResponse | UsersResponse;
   availabilityData = {} as WorkingHours | DayAvailability | DayAvailabilityResponse | AvailabilityResponse | DayAvailabilityResponse[] | Availability;
   prozToken = environment.production ? environment.prod_proz_token : environment.dev_proz_token;
@@ -74,7 +75,7 @@ export class LandingComponent {
   }
 
   getUsers = () => {
-    this.profileService.getUsers(this.prozToken).subscribe(
+    this.profileService.getUsers(this.prozToken, this.uuids).subscribe(
       (response: UsersResponse) => {
         this.userData = response;
       },
